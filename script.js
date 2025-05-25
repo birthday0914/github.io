@@ -1,6 +1,6 @@
 // HTML要素の取得
 const termTextElement = document.getElementById('term-text');
-const questionTextElement = document.getElementById('question-text');
+const questionTextElement = document.getElementById('question-text');　　
 const choicesAreaElement = document.getElementById('choices-area');
 const resultMessageElement = document.getElementById('result-message');
 const explanationTextElement = document.getElementById('explanation-text');
@@ -101,7 +101,6 @@ function displayQuestion() {
         return;
     }
 
-    const currentQuiz = currentQuizSet[currentQuestionIndex];
     console.log('Loaded currentQuiz:', currentQuiz); // ★ currentQuizの中身を確認
 
     if (!currentQuiz) {
