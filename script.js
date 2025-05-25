@@ -44,6 +44,115 @@ function displayQuestion() {
         button.classList.add('choice-button');
         button.onclick = () => handleChoice(choice.isCorrect, currentQuiz.explanation);
         choicesAreaElement.appendChild(button);
+
+        // 問題と選択肢を表示する関数
+function displayQuestion() {
+    console.log('--- displayQuestion START ---'); // ★デバッグ用
+    console.log('currentQuestionIndex:', currentQuestionIndex); // ★デバッグ用
+
+    resultMessageElement.textContent = '';
+    explanationTextElement.textContent = '';
+    nextButtonElement.style.display = 'none';
+
+    const currentQuiz = quizData[currentQuestionIndex];
+    console.log('currentQuiz object:', currentQuiz); // ★デバッグ用: currentQuiz全体を出力
+
+    if (!currentQuiz) {
+        console.error('CRITICAL ERROR: currentQuiz is undefined. quizData length:', quizData.length, 'currentQuestionIndex:', currentQuestionIndex); // ★デバッグ用
+        termTextElement.textContent = 'エラー: 次の問題データが見つかりません。';
+        questionTextElement.textContent = '';
+        choicesAreaElement.innerHTML = '';
+        return;
+    }
+
+    termTextElement.textContent = `用語: ${currentQuiz.term}`;
+    // ★★★↓ 問題文が表示されているか確認 ★★★
+    questionTextElement.textContent = currentQuiz.question;
+    console.log('Question text set to:', currentQuiz.question); // ★デバッグ用
+
+    choicesAreaElement.innerHTML = ''; // 既存の選択肢をクリア
+
+    if (!currentQuiz.choices || !Array.isArray(currentQuiz.choices) || currentQuiz.choices.length === 0) {
+        console.error('ERROR: currentQuiz.choices is invalid or empty.', currentQuiz.choices); // ★デバッグ用
+        choicesAreaElement.innerHTML = '<p style="color:red;">エラー: この問題の選択肢データがありません。</p>';
+        return;
+    }
+    console.log('currentQuiz.choices array:', currentQuiz.choices); // ★デバッグ用
+
+    currentQuiz.choices.forEach((choice, index) => {
+        console.log(`Looping for choice ${index}:`, choice); // ★デバッグ用
+        if (typeof choice.text === 'undefined' || typeof choice.isCorrect === 'undefined') {
+            console.warn(`Choice ${index} has missing properties:`, choice); // ★デバッグ用
+        }
+        const button = document.createElement('button');
+        button.textContent = choice.text;
+        button.classList.add('choice-button');
+        // disabled はデフォルトで false (有効)
+        button.onclick = () => handleChoice(choice.isCorrect, currentQuiz.explanation, button);
+        choicesAreaElement.appendChild(button);
+    });
+    console.log('choicesAreaElement.innerHTML after adding buttons:', choicesAreaElement.innerHTML); // ★デバッグ用
+    console.log('--- displayQuestion END ---'); // ★デバッグ用
+
+    // 問題と選択肢を表示する関数
+function displayQuestion() {
+    console.log('--- displayQuestion START ---');
+    console.log('currentQuestionIndex:', currentQuestionIndex);
+
+    resultMessageElement.textContent = '';
+    explanationTextElement.textContent = '';
+    nextButtonElement.style.display = 'none';
+
+    // ★★★↓ ここから追加/修正 ★★★
+    if (currentQuestionIndex < 0 || currentQuestionIndex >= quizData.length) {
+        console.error('ERROR: currentQuestionIndex is out of bounds!', currentQuestionIndex, 'quizData length:', quizData.length);
+        termTextElement.textContent = 'エラー: 問題インデックスが範囲外です。';
+        questionTextElement.textContent = '';
+        choicesAreaElement.innerHTML = '';
+        // クイズ終了処理を呼び出すか、エラーメッセージを表示して停止
+        showScore(); // 例えば、範囲外ならスコア表示（クイズ終了）させてしまう
+        return;
+    }
+    // ★★★↑ ここまで追加/修正 ★★★
+
+    const currentQuiz = quizData[currentQuestionIndex];
+    // console.log('currentQuiz object:', currentQuiz); // このログは残しておくと良い
+
+    if (!currentQuiz) { // このチェックも念のため残す
+        console.error('CRITICAL ERROR: currentQuiz is undefined even after bounds check. This should not happen.');
+        termTextElement.textContent = '致命的エラー: 問題データが取得できませんでした。';
+        // ... (以下同様のエラー処理)
+        return;
+    }
+
+    termTextElement.textContent = `用語: ${currentQuiz.term}`;
+    questionTextElement.textContent = currentQuiz.question;
+    // console.log('Question text set to:', currentQuiz.question);
+
+    choicesAreaElement.innerHTML = '';
+
+    if (!currentQuiz.choices || !Array.isArray(currentQuiz.choices) || currentQuiz.choices.length === 0) {
+        console.error('ERROR: currentQuiz.choices is invalid or empty.', currentQuiz.choices);
+        choicesAreaElement.innerHTML = '<p style="color:red;">エラー: この問題の選択肢データがありません。</p>';
+        return;
+    }
+    // console.log('currentQuiz.choices array:', currentQuiz.choices);
+
+    currentQuiz.choices.forEach((choice, index) => { // この行でエラーが出ていた
+        // console.log(`Looping for choice ${index}:`, choice);
+        if (typeof choice.text === 'undefined' || typeof choice.isCorrect === 'undefined') {
+            console.warn(`Choice ${index} has missing properties:`, choice);
+        }
+        const button = document.createElement('button');
+        button.textContent = choice.text;
+        button.classList.add('choice-button');
+        button.onclick = () => handleChoice(choice.isCorrect, currentQuiz.explanation, button);
+        choicesAreaElement.appendChild(button);
+    });
+    // console.log('choicesAreaElement.innerHTML after adding buttons:', choicesAreaElement.innerHTML);
+    console.log('--- displayQuestion END ---');
+}
+}
     });
 }
 
