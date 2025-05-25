@@ -70,65 +70,42 @@ function startQuiz() {
 }
 
 // 問題と選択肢を表示する関数
+// displayQuestion 関数内の参照を変更
 function displayQuestion() {
-    console.log('--- displayQuestion START ---');
-    console.log('currentQuestionIndex:', currentQuestionIndex, '| quizData.length:', quizData.length);
+    // ... (冒頭のログやチェックは currentQuizSet.length を使うように適宜変更) ...
+    console.log('currentQuestionIndex:', currentQuestionIndex, '| currentQuizSet.length:', currentQuizSet.length);
 
-    resultMessageElement.textContent = ''; // 前回の結果メッセージをクリア
-    explanationTextElement.textContent = ''; // 前回の解説をクリア
-    nextButtonElement.style.display = 'none'; // 次へボタンを隠す
-
-    // currentQuestionIndexが配列の範囲外かチェック
-    if (currentQuestionIndex < 0 || currentQuestionIndex >= quizData.length) {
-        console.error('ERROR: currentQuestionIndex is out of bounds!', currentQuestionIndex);
-        termTextElement.textContent = 'エラー: 問題インデックスが範囲外です。';
-        questionTextElement.textContent = '最初からやり直してください。';
-        choicesAreaElement.innerHTML = '';
-        showScore(); // 範囲外ならスコア表示（実質クイズ終了）
+    if (currentQuestionIndex < 0 || currentQuestionIndex >= currentQuizSet.length) { // ★ 変更
+        // ... (エラー処理) ...
+        showScore();
         return;
     }
 
-    const currentQuiz = quizData[currentQuestionIndex];
+    const currentQuiz = currentQuizSet[currentQuestionIndex]; // ★ 変更
 
-    // currentQuizオブジェクト自体が存在するかチェック (念のため)
-    if (!currentQuiz) {
-        console.error('CRITICAL ERROR: currentQuiz is undefined. quizData length:', quizData.length, 'currentQuestionIndex:', currentQuestionIndex);
-        termTextElement.textContent = '致命的エラー: 次の問題データが見つかりません。';
-        questionTextElement.textContent = '';
-        choicesAreaElement.innerHTML = '';
-        showScore(); // エラーなのでスコア表示
-        return;
+    // ... (以降、currentQuiz を使う部分はそのまま) ...
+}
+
+// nextButtonElement のイベントリスナー内の参照を変更
+nextButtonElement.addEventListener('click', () => {
+    currentQuestionIndex++;
+    // ... (ボタンのスタイルリセット) ...
+    // displayQuestion(); // displayQuestion は currentQuizSet.length を見るので、ここはこのままで良いが、
+    // もし明示的に比較するなら以下のようにする
+    if (currentQuestionIndex < currentQuizSet.length) { // ★ 変更 (任意だが分かりやすい)
+        displayQuestion();
+    } else {
+        showScore();
     }
+});
 
-    termTextElement.textContent = `用語: ${currentQuiz.term}`;
-    questionTextElement.textContent = currentQuiz.question;
-    console.log('Question text set to:', currentQuiz.question);
-
-    choicesAreaElement.innerHTML = ''; // 既存の選択肢をクリア
-
-    // currentQuiz.choices が配列であり、要素が存在するかチェック
-    if (!currentQuiz.choices || !Array.isArray(currentQuiz.choices) || currentQuiz.choices.length === 0) {
-        console.error('ERROR: currentQuiz.choices is invalid or empty.', currentQuiz.choices);
-        choicesAreaElement.innerHTML = '<p style="color:red;">エラー: この問題の選択肢データがありません。</p>';
-        // この場合、次の問題へ進めるようにするか、エラーで停止するか検討
-        nextButtonElement.style.display = 'block'; // とりあえず次へ進めるようにする
-        return;
-    }
-    console.log('currentQuiz.choices array:', currentQuiz.choices);
-
-    currentQuiz.choices.forEach((choice, index) => {
-        // console.log(`Looping for choice ${index}:`, choice);
-        if (typeof choice.text === 'undefined' || typeof choice.isCorrect === 'undefined') {
-            console.warn(`Choice ${index} from term "${currentQuiz.term}" has missing properties:`, choice);
-        }
-        const button = document.createElement('button');
-        button.textContent = choice.text;
-        button.classList.add('choice-button');
-        // disabled はデフォルトで false (有効)
-        button.onclick = () => handleChoice(choice.isCorrect, currentQuiz.explanation, button, currentQuiz.choices);
-        choicesAreaElement.appendChild(button);
-    });
-    console.log('--- displayQuestion END ---');
+// showScore 関数内の参照を変更
+function showScore() {
+    // ... (他の処理) ...
+    totalQuestionsElement.textContent = currentQuizSet.length; // ★ 変更
+    scoreAreaElement.style.display = 'block';
+    // ★ ここで点数に応じたコメントを表示する処理を追加
+    displayScoreComment();
 }
 
 // 選択肢が選ばれたときの処理
@@ -180,6 +157,33 @@ function showScore() {
     scoreElement.textContent = score;
     totalQuestionsElement.textContent = quizData.length; // quizDataが定義されている前提
     scoreAreaElement.style.display = 'block';
+}
+
+// script.js のどこか (showScore の近くなど) に追加
+function displayScoreComment() {
+    const percentage = (score / currentQuizSet.length) * 100;
+    let comment = "";
+
+    if (percentage === 100) {
+        comment = "素晴らしい！全問正解です！🎉 AI Studioマスターですね！";
+    } else if (percentage >= 80) {
+        comment = "優秀です！ほとんど理解できていますね！✨ あと一息！";
+    } else if (percentage >= 60) {
+        comment = "良い調子です！さらに学習を続けて完璧を目指しましょう！💪";
+    } else if (percentage >= 40) {
+        comment = "まずまずの結果です。苦手な部分を復習してみましょう。📚";
+    } else {
+        comment = "もう少し頑張りましょう！基本からしっかり復習するのが大切です。📖";
+    }
+
+    // コメントを表示するための新しいHTML要素を準備 (index.htmlに追加が必要)
+    const scoreCommentElement = document.getElementById('score-comment');
+    if (scoreCommentElement) {
+        scoreCommentElement.textContent = comment;
+        scoreCommentElement.style.display = 'block'; // 表示する
+    } else {
+        console.warn("Element with id 'score-comment' not found. Cannot display score comment.");
+    }
 }
 
 // 最初からやり直す
