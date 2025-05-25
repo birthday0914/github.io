@@ -46,8 +46,6 @@ function startQuiz() {
 
 
 // script.js のグローバル変数部分
-let currentQuestionIndex = 0;
-let score = 0;
 let currentQuizSet = []; // ★ シャッフルされた問題セットを保持
 const questionsPerGame = 10; // ★ 1ゲームあたりの問題数
 
