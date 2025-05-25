@@ -42,7 +42,10 @@ function startQuiz() {
     resultMessageElement.textContent = '';
     explanationTextElement.textContent = '';
     // 既存の選択肢ボタンがあればクリア（リスタート時に重要）
-    // script.js のグローバル変数部分
+
+
+
+// script.js のグローバル変数部分
 let currentQuestionIndex = 0;
 let score = 0;
 let currentQuizSet = []; // ★ シャッフルされた問題セットを保持
@@ -74,11 +77,6 @@ function startQuiz() {
     explanationTextElement.textContent = '';
     choicesAreaElement.innerHTML = '';
     displayQuestion();
-}
-    choicesAreaElement.innerHTML = '';
-    displayQuestion();
-    
-    
 }
 
 // 問題と選択肢を表示する関数
