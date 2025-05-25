@@ -135,7 +135,6 @@ function displayQuestion() {
     });
     console.log('Finished creating choice buttons. choicesAreaElement.innerHTML:', choicesAreaElement.innerHTML); // ★ 選択肢HTMLの確認
     console.log('--- displayQuestion END ---');
-}
 
     if (currentQuestionIndex < 0 || currentQuestionIndex >= currentQuizSet.length) { // ★ 変更
         // ... (エラー処理) ...
