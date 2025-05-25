@@ -424,6 +424,129 @@ const quizData = [
       { "text": "AIが生成する画像ファイルの形式の一つ", "isCorrect": false }
     ],
     "explanation": "「JSON (JavaScript Object Notation)」は、キーと値のペアを基本とする、シンプルで軽量なデータ記述形式です。API間のデータ交換や設定ファイルの記述など、ウェブ開発や多くのプログラミング分野で広く利用されています。"
+  },
+  // quizData.js に追加
+// (IDはご自身の環境に合わせて調整してください)
+  {
+    "id": 36,
+    "term": "Details",
+    "question": "UIやドキュメントにおける「Details」セクションやボタンが示すものは何ですか？",
+    "choices": [
+      { "text": "項目の概要や要約", "isCorrect": false },
+      { "text": "項目に関するより詳しい情報、具体的な内容、または詳細な設定", "isCorrect": true },
+      { "text": "項目をリストから削除する操作", "isCorrect": false },
+      { "text": "項目を他者と共有するための機能", "isCorrect": false }
+    ],
+    "explanation": "「Details」は、概要や一覧表示では省略されている、より詳細な情報や具体的なデータ、設定項目などを表示・アクセスするために使用されるUI要素やセクション名です。"
+  },
+  {
+    "id": 37,
+    "term": "Collapse / Expand",
+    "question": "UI上でセクションやリストの表示を「Collapse / Expand」するとはどういう操作ですか？",
+    "choices": [
+      { "text": "情報を新しいウィンドウで開く / 閉じる操作", "isCorrect": false },
+      { "text": "表示されている情報の詳細を折りたたんで隠す / 折りたたまれた情報を展開して表示する操作", "isCorrect": true },
+      { "text": "フォントサイズを小さくする / 大きくする操作", "isCorrect": false },
+      { "text": "設定をデフォルト値に戻す / カスタム値に戻す操作", "isCorrect": false }
+    ],
+    "explanation": "「Collapse（折りたたむ）」は、情報量が多いUIで詳細部分を一時的に隠して表示を簡潔にする操作です。「Expand（展開する）」はその逆で、隠れている詳細情報を表示します。ツリー表示やアコーディオンUIでよく見られます。"
+  },
+  {
+    "id": 38,
+    "term": "Checkbox",
+    "question": "UIフォームにおける「Checkbox（チェックボックス）」の主な機能は何ですか？",
+    "choices": [
+      { "text": "複数の選択肢の中から必ず一つだけを選ぶ", "isCorrect": false },
+      { "text": "複数の選択肢の中から、一つ以上を任意に選択（または非選択に）する", "isCorrect": true },
+      { "text": "自由なテキストを入力する", "isCorrect": false },
+      { "text": "特定のアクションを実行するボタン", "isCorrect": false }
+    ],
+    "explanation": "「Checkbox」は、ユーザーが複数の選択項目の中から、該当するものを一つ以上（あるいはゼロ個も可）選択できるようにするためのUIコントロールです。各項目は独立してオン/オフできます。"
+  },
+  {
+    "id": 39,
+    "term": "Radio button",
+    "question": "UIフォームにおける「Radio button（ラジオボタン）」の特徴は何ですか？",
+    "choices": [
+      { "text": "複数の選択肢の中から、任意の数を選べる", "isCorrect": false },
+      { "text": "グループ化された複数の選択肢の中から、必ず一つだけしか選べない", "isCorrect": true },
+      { "text": "オンとオフの二つの状態を切り替えるスイッチ", "isCorrect": false },
+      { "text": "長いリストから項目を検索するための入力フィールド", "isCorrect": false }
+    ],
+    "explanation": "「Radio button」は、一組の選択肢の中からユーザーが一つだけを選択する必要がある場合に使用されるUIコントロールです。一つを選ぶと、他の選択肢は自動的に非選択になります。"
+  },
+  {
+    "id": 40,
+    "term": "Tooltip",
+    "question": "UIにおける「Tooltip（ツールチップ）」とは何ですか？",
+    "choices": [
+      { "text": "アプリケーションの全ての機能を一覧表示するメニュー", "isCorrect": false },
+      { "text": "ボタンやアイコンなどにマウスカーソルを合わせると表示される、その要素の簡単な説明や補足情報", "isCorrect": true },
+      { "text": "エラー発生時に表示される詳細なエラーメッセージウィンドウ", "isCorrect": false },
+      { "text": "アプリケーションのヘルプドキュメント全体", "isCorrect": false }
+    ],
+    "explanation": "「Tooltip」は、UI上の特定の要素（ボタン、アイコン、リンクなど）にマウスオーバーしたり、タップしたりした際に、その要素の名称や機能、補足的な情報を短いテキストで表示する小さなポップアップです。"
+  },
+  {
+    "id": 41,
+    "term": "Suffix (prompting)",
+    "question": "プロンプトエンジニアリングにおける「Suffix（サフィックス）」とは何を指しますか？",
+    "choices": [
+      { "text": "AIモデルが応答を始める際の決まった開始フレーズ", "isCorrect": false },
+      { "text": "ユーザーが入力する主要な指示や質問の後に追加され、AIの応答形式を補足したり、続きを促したりするテキスト", "isCorrect": true },
+      { "text": "プロンプト全体の文字数を数えるための単位", "isCorrect": false },
+      { "text": "AIモデルの出力のランダム性を調整するパラメータ", "isCorrect": false }
+    ],
+    "explanation": "プロンプトにおける「Suffix」は、ユーザーの主な入力の後に追加されるテキストで、モデルが生成する応答の続きを促したり（例: 「上記の文章の続きは：」）、特定の形式で応答を終えるように指示したりするのに使われることがあります。"
+  },
+  {
+    "id": 42,
+    "term": "Zero-shot (prompting)",
+    "question": "プロンプト手法における「Zero-shot」とはどのような指示の仕方ですか？",
+    "choices": [
+      { "text": "AIにタスクの実行例を多数見せてから指示すること", "isCorrect": false },
+      { "text": "AIにタスクの実行例を一切見せずに、タスクの説明だけで指示すること", "isCorrect": true },
+      { "text": "プロンプトに何も入力せずにAIに応答させること", "isCorrect": false },
+      { "text": "AIに非常に短い、一言だけのプロンプトを与えること", "isCorrect": false }
+    ],
+    "explanation": "「Zero-shot prompting」は、AIモデルに対して、そのタスクを実行するための具体的な手本（例）を一切提示せず、タスクの指示や説明のみを与えて応答させる手法です。モデルが持つ汎用的な知識や能力に依存します。"
+  },
+  {
+    "id": 43,
+    "term": "Constraints",
+    "question": "AIへの指示やプロンプトにおける「Constraints（制約）」とは何を意味しますか？",
+    "choices": [
+      { "text": "AIモデルの学習データに含まれる偏り", "isCorrect": false },
+      { "text": "AIが応答を生成する際に守るべき条件、制限、またはルール", "isCorrect": true },
+      { "text": "AIモデルの最大出力トークン数のこと", "isCorrect": false },
+      { "text": "AIの応答の創造性の度合い", "isCorrect": false }
+    ],
+    "explanation": "「Constraints」は、AIがタスクを実行したり応答を生成したりする際に従うべき特定の条件や制限事項です。例えば、「応答は3文以内で」「専門用語を使わずに」といった指示がこれにあたります。"
+  },
+  {
+    "id": 44,
+    "term": "Formatting (prompt/output)",
+    "question": "AIのプロンプトや出力における「Formatting（書式設定）」とは何を指しますか？",
+    "choices": [
+      { "text": "AIモデルの内部的なデータ構造のこと", "isCorrect": false },
+      { "text": "テキストの見た目（フォント、色、サイズなど）や構造（箇条書き、表、マークダウンなど）を指定したり、それに従って出力したりすること", "isCorrect": true },
+      { "text": "AIが生成する応答の感情的なトーンのこと", "isCorrect": false },
+      { "text": "プロンプトの入力フィールドの最大文字数", "isCorrect": false }
+    ],
+    "explanation": "「Formatting」は、テキストデータの表示形式や構造を整えることです。プロンプトで特定の出力形式（例: JSON、マークダウン、箇条書き）を指示したり、AIがその指示に従って整形されたテキストを出力したりします。"
+  },
+  {
+    "id": 45,
+    "term": "Refine (prompt)",
+    "question": "プロンプトを「Refine（リファイン）」するとは、どのような作業を指しますか？",
+    "choices": [
+      { "text": "プロンプトを完全に新しいものに書き換えること", "isCorrect": false },
+      { "text": "既存のプロンプトをより明確に、効果的に、または望ましい結果が得られるように調整・改良すること", "isCorrect": true },
+      { "text": "プロンプトを複数の短いプロンプトに分割すること", "isCorrect": false },
+      { "text": "プロンプトを他の言語に翻訳すること", "isCorrect": false }
+    ],
+    "explanation": "プロンプトを「Refine」するとは、最初のプロンプトで得られた結果を元に、指示の曖昧さをなくしたり、より具体的な情報を追加したり、例を加えたりするなどして、AIからの出力を改善していく試行錯誤のプロセスです。"
   }
+  // ... さらに時間があれば追加します。
   // ... 残りのクイズデータ ...
 ];
