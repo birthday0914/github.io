@@ -1,0 +1,101 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.quiz-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+#question-area h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+#question-area p {
+    font-size: 1.1em;
+    color: #555;
+    min-height: 40px; /* 問題文の高さがある程度揃うように */
+}
+
+#choices-area {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 選択肢ボタンの間隔 */
+}
+
+.choice-button {
+    padding: 12px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.choice-button:hover {
+    background-color: #0056b3;
+}
+
+.choice-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+#feedback-area {
+    margin-top: 20px;
+    min-height: 60px; /* フィードバックエリアの高さ */
+}
+
+#result-message {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#explanation-text {
+    margin-top: 10px;
+    color: #444;
+    font-size: 0.95em;
+    text-align: left;
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+
+#next-button, #restart-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#next-button:hover, #restart-button:hover {
+    background-color: #1e7e34;
+}
+
+#score-area {
+    margin-top: 30px;
+    font-size: 1.2em;
+}
