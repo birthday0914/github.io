@@ -171,7 +171,7 @@ function showScore() {
 // 点数に応じたコメントを表示する関数
 function displayScoreComment() {
     if (!scoreCommentElement) { // HTML要素がない場合は何もしない
-        console.warn("Element with id 'score-comment' not found.");
+        console.warn("Element with id 'score-comment' not found in displayScoreComment.");
         return;
     }
 
@@ -193,6 +193,7 @@ function displayScoreComment() {
     }
     scoreCommentElement.textContent = comment;
     scoreCommentElement.style.display = 'block';
+    console.log("Score comment set to:", comment); // デバッグ用ログ
 }
 
 // --- イベントリスナー ---
