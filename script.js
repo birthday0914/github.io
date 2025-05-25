@@ -21,8 +21,20 @@ function shuffleArray(array) {
     }
 }
 
-// クイズの初期化と表示
+// startQuiz 関数を修正
 function startQuiz() {
+    // ... (シャッフル処理など) ...
+
+    // scoreCommentElement があれば非表示にする
+    const scoreCommentElement = document.getElementById('score-comment');
+    if (scoreCommentElement) {
+        scoreCommentElement.style.display = 'none';
+    }
+
+    currentQuestionIndex = 0;
+    // ... (残りの初期化処理) ...
+    displayQuestion();
+}
     currentQuestionIndex = 0;
     score = 0;
     scoreAreaElement.style.display = 'none';
@@ -157,6 +169,7 @@ function showScore() {
     scoreElement.textContent = score;
     totalQuestionsElement.textContent = quizData.length; // quizDataが定義されている前提
     scoreAreaElement.style.display = 'block';
+      displayScoreComment(); // ★ この行を追加
 }
 
 // script.js のどこか (showScore の近くなど) に追加
