@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>My First GitHub Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Studio 英単語クイズ</title>
+    <link rel="stylesheet" href="style.css"> <!-- CSSファイルを読み込む (任意) -->
 </head>
 <body>
-  <h1>ようこそ！</h1>
-  <p>このページはGitHub Pagesで作成しています。</p>
+    <div class="quiz-container">
+        <h1>AI Studio 英単語クイズ</h1>
 
-  <!-- ここが画像表示部分 -->
-  <img src="https://placekitten.com/400/300" alt="かわいいネコ" />
+        <div id="question-area">
+            <h2 id="term-text"></h2>
+            <p id="question-text"></p>
+        </div>
 
+        <div id="choices-area">
+            <!-- 選択肢はJavaScriptで生成します -->
+        </div>
+
+        <div id="feedback-area">
+            <p id="result-message"></p>
+            <p id="explanation-text"></p>
+        </div>
+
+        <button id="next-button" style="display:none;">次の問題へ</button>
+        <div id="score-area" style="display:none;">
+            <p>あなたのスコア: <span id="score">0</span> / <span id="total-questions">0</span></p>
+            <button id="restart-button">もう一度挑戦</button>
+        </div>
+    </div>
+
+    <script src="quizData.js"></script> <!-- クイズデータを読み込む -->
+    <script src="script.js"></script>   <!-- クイズのロジックを読み込む -->
 </body>
 </html>
