@@ -13,6 +13,14 @@ const restartButtonElement = document.getElementById('restart-button');
 let currentQuestionIndex = 0;
 let score = 0;
 
+// script.js の上部 (HTML要素取得の後など) に追加
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // 要素を入れ替え
+    }
+}
+
 // クイズの初期化と表示
 function startQuiz() {
     currentQuestionIndex = 0;
@@ -22,8 +30,43 @@ function startQuiz() {
     resultMessageElement.textContent = '';
     explanationTextElement.textContent = '';
     // 既存の選択肢ボタンがあればクリア（リスタート時に重要）
+    // script.js のグローバル変数部分
+let currentQuestionIndex = 0;
+let score = 0;
+let currentQuizSet = []; // ★ シャッフルされた問題セットを保持
+const questionsPerGame = 10; // ★ 1ゲームあたりの問題数
+
+// startQuiz 関数を修正
+function startQuiz() {
+    // quizDataをシャッフルして、最初の10問（または全問）を取得
+    const shuffledQuizData = [...quizData]; // quizDataのコピーを作成してシャッフル
+    shuffleArray(shuffledQuizData);
+    currentQuizSet = shuffledQuizData.slice(0, Math.min(questionsPerGame, shuffledQuizData.length)); // 10問、または全問数が10未満なら全問
+
+    if (currentQuizSet.length === 0) {
+        console.error("ERROR: No questions available in currentQuizSet.");
+        // ユーザーにエラーメッセージを表示する処理
+        const quizContainer = document.querySelector('.quiz-container');
+        if (quizContainer) {
+            quizContainer.innerHTML = '<h1 style="color:red;">エラー: 表示できる問題がありません。</h1>';
+        }
+        return;
+    }
+
+
+    currentQuestionIndex = 0;
+    score = 0;
+    scoreAreaElement.style.display = 'none';
+    nextButtonElement.style.display = 'none';
+    resultMessageElement.textContent = '';
+    explanationTextElement.textContent = '';
     choicesAreaElement.innerHTML = '';
     displayQuestion();
+}
+    choicesAreaElement.innerHTML = '';
+    displayQuestion();
+    
+    
 }
 
 // 問題と選択肢を表示する関数
