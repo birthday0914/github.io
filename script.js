@@ -79,9 +79,63 @@ function startQuiz() {
 
 // 問題と選択肢を表示する関数
 // displayQuestion 関数内の参照を変更
+
 function displayQuestion() {
-    // ... (冒頭のログやチェックは currentQuizSet.length を使うように適宜変更) ...
+    console.log('--- displayQuestion START ---');
     console.log('currentQuestionIndex:', currentQuestionIndex, '| currentQuizSet.length:', currentQuizSet.length);
+
+    // ★ デバッグログ追加
+    console.log('Checking HTML elements:');
+    console.log('termTextElement:', termTextElement);
+    console.log('questionTextElement:', questionTextElement);
+    console.log('choicesAreaElement:', choicesAreaElement);
+
+    resultMessageElement.textContent = '';
+    explanationTextElement.textContent = '';
+    nextButtonElement.style.display = 'none';
+
+    if (currentQuestionIndex < 0 || currentQuestionIndex >= currentQuizSet.length) {
+        console.error('ERROR: currentQuestionIndex is out of bounds!', currentQuestionIndex);
+        // ... (エラー処理) ...
+        showScore();
+        return;
+    }
+
+    const currentQuiz = currentQuizSet[currentQuestionIndex];
+    console.log('Loaded currentQuiz:', currentQuiz); // ★ currentQuizの中身を確認
+
+    if (!currentQuiz) {
+        console.error('CRITICAL ERROR: currentQuiz is undefined. Cannot display question.');
+        termTextElement.textContent = '致命的エラー: 問題データが取得できませんでした。';
+        // ...
+        return;
+    }
+
+    // ★ termTextElement にテキストが設定されるか確認
+    termTextElement.textContent = `用語: ${currentQuiz.term}`;
+    console.log('Set term text to:', termTextElement.textContent);
+
+    // ★ questionTextElement にテキストが設定されるか確認
+    questionTextElement.textContent = currentQuiz.question;
+    console.log('Set question text to:', questionTextElement.textContent);
+
+    choicesAreaElement.innerHTML = '';
+
+    if (!currentQuiz.choices || !Array.isArray(currentQuiz.choices) || currentQuiz.choices.length === 0) {
+        console.error('ERROR: currentQuiz.choices is invalid or empty.', currentQuiz.choices);
+        choicesAreaElement.innerHTML = '<p style="color:red;">エラー: この問題の選択肢データがありません。</p>';
+        nextButtonElement.style.display = 'block';
+        return;
+    }
+    console.log('Processing choices:', currentQuiz.choices);
+
+    currentQuiz.choices.forEach((choice, index) => {
+        console.log(`Creating button for choice ${index}:`, choice.text); // ★ ボタン生成のログ
+        // ... (ボタン作成処理) ...
+    });
+    console.log('Finished creating choice buttons. choicesAreaElement.innerHTML:', choicesAreaElement.innerHTML); // ★ 選択肢HTMLの確認
+    console.log('--- displayQuestion END ---');
+}
 
     if (currentQuestionIndex < 0 || currentQuestionIndex >= currentQuizSet.length) { // ★ 変更
         // ... (エラー処理) ...
